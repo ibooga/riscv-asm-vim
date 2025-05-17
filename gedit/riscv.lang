@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language id="riscv" _name="RISC-V Assembly" version="2.0" _section="Programming">
   <metadata>
-    <property name="globs">*.S;*.s</property>
     <property name="mimetypes">text/x-riscv</property>
+    <property name="globs">*.S;*.s</property>
     <property name="line-comment-start">#</property>
   </metadata>
   <styles>
@@ -10,8 +10,9 @@
     <style id="string"       _name="String"       map-to="def:string"/>
     <style id="number"       _name="Number"       map-to="def:number"/>
     <style id="instruction"  _name="Instruction"  map-to="def:keyword"/>
-    <style id="register"     _name="Register"     map-to="def:type"/>
     <style id="directive"    _name="Directive"    map-to="def:preprocessor"/>
+    <style id="register"     _name="Register"     map-to="def:type"/>
+    <style id="label"        _name="Label"        map-to="def:identifier"/>
   </styles>
   <definitions>
     <context id="comment" style-ref="comment" end-at-line-end="true">
@@ -34,34 +35,35 @@
     <context id="directive" style-ref="directive">
       <match>\.[A-Za-z_\.]+</match>
     </context>
+    <context id="label" style-ref="label">
+      <match>^[A-Za-z_.][A-Za-z0-9_.]*:</match>
+    </context>
     <context id="register" style-ref="register">
-      <keyword>zero</keyword>
-      <keyword>ra sp gp tp fp</keyword>
+      <keyword>zero ra sp gp tp t0 t1 t2 t3 t4 t5 t6 fp</keyword>
       <keyword>a0 a1 a2 a3 a4 a5 a6 a7</keyword>
-      <keyword>t0 t1 t2 t3 t4 t5 t6 t7</keyword>
       <keyword>s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11</keyword>
       <keyword>x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31</keyword>
+      <keyword>ft0 ft1 ft2 ft3 ft4 ft5 ft6 ft7 ft8 ft9 ft10 ft11 ft12 ft13 ft14 ft15 ft16 ft17 ft18 ft19 ft20 ft21 ft22 ft23 ft24 ft25 ft26 ft27 ft28 ft29 ft30 ft31</keyword>
     </context>
     <context id="instruction" style-ref="instruction">
-      <keyword>lui auipc</keyword>
-      <keyword>jal jalr</keyword>
-      <keyword>beq bne blt bge bltu bgeu</keyword>
-      <keyword>lb lh lw lbu lhu</keyword>
-      <keyword>sb sh sw</keyword>
-      <keyword>addi slti sltiu xori ori andi</keyword>
-      <keyword>slli srli srai</keyword>
+      <keyword>lui auipc jal jalr beq bne blt bge bltu bgeu</keyword>
+      <keyword>lb lh lw lbu lhu sb sh sw</keyword>
+      <keyword>addi slti sltiu xori ori andi slli srli srai</keyword>
       <keyword>add sub sll slt sltu xor srl sra or and</keyword>
-      <keyword>fence fence.tso</keyword>
-      <keyword>ecall ebreak</keyword>
-      <keyword>la lla lga unimp nop li mv not neg negw sext.b sext.h sext.w zext.b zext.h zext.w</keyword>
-      <keyword>seqz snez sltz sgtz</keyword>
-      <keyword>beqz bnez blez bgez bltz bgtz</keyword>
-      <keyword>bgt ble bgtu bleu</keyword>
-      <keyword>j jr ret call tail</keyword>
+      <keyword>fence fence.i fence.tso ecall ebreak</keyword>
+      <keyword>csrrw csrrs csrrc csrrwi csrrsi csrrci</keyword>
+      <keyword>mul mulh mulhsu mulhu div divu rem remu</keyword>
+      <keyword>flw fsw fadd.s fsub.s fmul.s fdiv.s fsqrt.s</keyword>
+      <keyword>fsgnj.s fsgnjn.s fsgnjx.s fmin.s fmax.s</keyword>
+      <keyword>fcvt.w.s fcvt.wu.s fmv.x.w feq.s flt.s fle.s fclass.s</keyword>
+      <keyword>fcvt.s.w fcvt.s.wu fmv.w.x</keyword>
+      <keyword>la lla lga nop li mv not neg negw sext.b sext.h sext.w zext.b zext.h zext.w</keyword>
+      <keyword>seqz snez sltz sgtz beqz bnez blez bgez bltz bgtz</keyword>
+      <keyword>bgt ble bgtu bleu j jr ret call tail</keyword>
     </context>
     <context id="numbers" style-ref="number">
-      <match>0x[0-9A-Fa-f]+</match>
-      <match>0b[01]+</match>
+      <match>0[xX][0-9a-fA-F]+</match>
+      <match>0[bB][01]+</match>
       <match>[0-9]+</match>
     </context>
     <context id="riscv">
@@ -71,6 +73,7 @@
         <context ref="string"/>
         <context ref="string-single"/>
         <context ref="directive"/>
+        <context ref="label"/>
         <context ref="register"/>
         <context ref="instruction"/>
         <context ref="numbers"/>

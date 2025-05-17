@@ -496,7 +496,7 @@ If the option is defined (set to any value), the plugin will display more inform
 
 ## Gedit Syntax
 
-The repository includes a GtkSourceView language definition for basic RISC-V assembly highlighting in gedit. Copy `gedit/riscv.lang` to your local `~/.local/share/gtksourceview-*/language-specs/` directory (create it if it does not exist) and restart gedit to enable the syntax.
+The repository includes a GtkSourceView language definition for RISC-V assembly highlighting in gedit. It builds on ideas from [riscv-asm-gedit](https://github.com/YohnWang/riscv-asm-gedit) and adds a larger instruction set from this plugin. Copy `gedit/riscv.lang` to your local `~/.local/share/gtksourceview-*/language-specs/` directory (create it if it does not exist) and restart gedit to enable the syntax.
 
 
 ## Contributing
