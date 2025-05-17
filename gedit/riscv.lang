@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language id="riscv" _name="RISC-V Assembly" version="2.0" _section="Programming">
+  <metadata>
+    <property name="globs">*.S;*.s</property>
+    <property name="mime_type">text/x-riscv</property>
+    <property name="line-comment-start">#</property>
+  </metadata>
+  <styles>
+    <style id="comment"      _name="Comment"      map-to="def:comment"/>
+    <style id="string"       _name="String"       map-to="def:string"/>
+    <style id="number"       _name="Number"       map-to="def:number"/>
+    <style id="instruction"  _name="Instruction"  map-to="def:keyword"/>
+    <style id="register"     _name="Register"     map-to="def:type"/>
+    <style id="directive"    _name="Directive"    map-to="def:preprocessor"/>
+  </styles>
+  <definitions>
+    <context id="comment" style-ref="comment" end-at-line-end="true">
+      <start>#</start>
+    </context>
+    <context id="c-comment" style-ref="comment">
+      <start>/\*</start>
+      <end>\*/</end>
+    </context>
+    <context id="string" style-ref="string">
+      <start>"</start>
+      <end>"</end>
+      <escape>\\</escape>
+    </context>
+    <context id="string-single" style-ref="string">
+      <start>'</start>
+      <end>'</end>
+      <escape>\\</escape>
+    </context>
+    <context id="directive" style-ref="directive">
+      <match>\.[A-Za-z_\.]+</match>
+    </context>
+    <context id="register" style-ref="register">
+      <keyword>zero</keyword>
+      <keyword>ra sp gp tp fp</keyword>
+      <keyword>a0 a1 a2 a3 a4 a5 a6 a7</keyword>
+      <keyword>t0 t1 t2 t3 t4 t5 t6 t7</keyword>
+      <keyword>s0 s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11</keyword>
+      <keyword>x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31</keyword>
+    </context>
+    <context id="instruction" style-ref="instruction">
+      <keyword>lui auipc</keyword>
+      <keyword>jal jalr</keyword>
+      <keyword>beq bne blt bge bltu bgeu</keyword>
+      <keyword>lb lh lw lbu lhu</keyword>
+      <keyword>sb sh sw</keyword>
+      <keyword>addi slti sltiu xori ori andi</keyword>
+      <keyword>slli srli srai</keyword>
+      <keyword>add sub sll slt sltu xor srl sra or and</keyword>
+      <keyword>fence fence.tso</keyword>
+      <keyword>ecall ebreak</keyword>
+      <keyword>la lla lga unimp nop li mv not neg negw sext.b sext.h sext.w zext.b zext.h zext.w</keyword>
+      <keyword>seqz snez sltz sgtz</keyword>
+      <keyword>beqz bnez blez bgez bltz bgtz</keyword>
+      <keyword>bgt ble bgtu bleu</keyword>
+      <keyword>j jr ret call tail</keyword>
+    </context>
+    <context id="numbers" style-ref="number">
+      <match>0x[0-9A-Fa-f]+</match>
+      <match>0b[01]+</match>
+      <match>[0-9]+</match>
+    </context>
+    <context id="riscv">
+      <include>
+        <context ref="comment"/>
+        <context ref="c-comment"/>
+        <context ref="string"/>
+        <context ref="string-single"/>
+        <context ref="directive"/>
+        <context ref="register"/>
+        <context ref="instruction"/>
+        <context ref="numbers"/>
+      </include>
+    </context>
+  </definitions>
+  <patterns>
+    <include ref="riscv"/>
+  </patterns>
+</language>
