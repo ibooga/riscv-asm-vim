@@ -494,6 +494,11 @@ If the option is defined (set to any value), the plugin will display more inform
 ### Tagbar
 [Tagbar](https://github.com/preservim/tagbar) is a Vim plugin that provides an easy way to browse the tags of the current file and get an overview of its structure. Follow steps in [Tagbar Wiki](https://github.com/preservim/tagbar/wiki#risc-v-asm) to apply it.
 
+## Gedit Syntax
+
+The repository includes a GtkSourceView language definition for RISC-V assembly highlighting in gedit. It builds on ideas from [riscv-asm-gedit](https://github.com/YohnWang/riscv-asm-gedit) and adds a larger instruction set from this plugin. Copy `gedit/riscv.lang` to your local `~/.local/share/gtksourceview-*/language-specs/` directory (create it if it does not exist) and restart gedit to enable the syntax.
+
+
 ## Contributing
 
 Contributions are welcome! If you encounter issues or have suggestions for improvements, please open an issue or submit a pull request on the [riscv-asm-vim](https://github.com/henry-hsieh/riscv-asm-vim).
