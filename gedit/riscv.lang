@@ -2,7 +2,7 @@
 <language id="riscv" _name="RISC-V Assembly" version="2.0" _section="Programming">
   <metadata>
     <property name="globs">*.S;*.s</property>
-    <property name="mime_type">text/x-riscv</property>
+    <property name="mimetypes">text/x-riscv</property>
     <property name="line-comment-start">#</property>
   </metadata>
   <styles>
